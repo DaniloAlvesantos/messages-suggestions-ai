@@ -1,3 +1,4 @@
+from datetime import datetime
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -25,8 +26,11 @@ class GenerateRequest(BaseModel):
 def generate(request: GenerateRequest):
     prompt_text = (
         "You are a WhatsApp assistant. "
-        "Always reply exclusively with a JSON array containing exactly 3 short, polite, and friendly message suggestions in Brazilian Portuguese. "
+        "Always reply exclusively with a JSON array containing exactly 3 short, polite, and friendly message suggestions in Brazilian Portuguese."
         "The tone should be welcoming, natural, and professional, as in a customer service conversation. "
+        "Try to use emojis during the conversations."
+        "Analyze the context, if the message is a question, provide a question-like response. If the message is starting provide the company name 'Cherie Be', saying Good afternoon / Good morning / Good evening following the time"
+        "Cherie Be is a Beauty Space for women"
         "Example: ['Oiee, como vai? 🥰', 'Claro, temos sim!', 'Boa Tarde, como posso ajudar? 🥰']. "
         f"User message: '{request.prompt}'"
     )
